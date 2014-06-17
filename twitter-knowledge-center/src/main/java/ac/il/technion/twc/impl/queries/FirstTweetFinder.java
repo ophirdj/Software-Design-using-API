@@ -32,9 +32,12 @@ public class FirstTweetFinder implements Visitor {
 
 	/**
 	 * @param userID
-	 * @return Tweet ID or null if no tweets were found for user.
+	 * @return Tweet ID of first tweet of user.
+	 * @throws NotFoundException
+	 *             If no tweets were found for this user.
 	 */
-	public String getUserFirstTweet(final String userID) {
+	public String getUserFirstTweet(final String userID)
+			throws NotFoundException {
 		String $ = null;
 		Date firstDate = new Date(Long.MAX_VALUE);
 		for (final Tweet tweet : tweets)
@@ -44,7 +47,18 @@ public class FirstTweetFinder implements Visitor {
 				firstDate = tweet.getDate();
 				$ = tweet.getTweetID();
 			}
+		if ($ == null)
+			throw new NotFoundException();
 		return $;
+	}
+
+	/**
+	 * @author Ophir De Jager
+	 * 
+	 */
+	public static class NotFoundException extends RuntimeException {
+
+		private static final long serialVersionUID = 2792149936612616492L;
 	}
 
 }
