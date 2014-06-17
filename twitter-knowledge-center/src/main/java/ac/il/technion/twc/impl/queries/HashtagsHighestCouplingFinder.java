@@ -21,7 +21,7 @@ import ac.il.technion.twc.api.visitor.Visitor;
  */
 public class HashtagsHighestCouplingFinder implements Visitor {
 
-  private List<String> coupledHashtags = Collections.<String> emptyList();;
+  private List<String> coupledHashtags = Collections.<String> emptyList();
 
   @Override
   public void visit(final TwitterQueryAPI twitter) {
