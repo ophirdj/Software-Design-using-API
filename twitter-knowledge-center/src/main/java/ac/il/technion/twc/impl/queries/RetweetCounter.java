@@ -1,5 +1,6 @@
 package ac.il.technion.twc.impl.queries;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,13 +24,13 @@ public class RetweetCounter implements Visitor {
 
   @Override
   public void visit(final TwitterQueryAPI twitter) {
-    tweets = twitter.getTweets();
+    tweets = Collections.unmodifiableList(twitter.getTweets());
   }
 
   @Override
   public void clearData() {
-    tweets.clear();
-    retweetsCountById.clear();
+    tweets = Collections.<Tweet> emptyList();
+    retweetsCountById = Collections.<String, Integer> emptyMap();
   }
 
   /**
@@ -48,6 +49,7 @@ public class RetweetCounter implements Visitor {
         continue;
       }
     }
+    retweetsCountById = Collections.unmodifiableMap(retweetsCountById);
   }
 
   /**

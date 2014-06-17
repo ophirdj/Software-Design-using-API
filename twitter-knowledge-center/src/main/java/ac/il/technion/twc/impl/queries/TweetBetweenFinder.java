@@ -2,6 +2,7 @@ package ac.il.technion.twc.impl.queries;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -22,12 +23,12 @@ public class TweetBetweenFinder implements Visitor {
 
   @Override
   public void visit(final TwitterQueryAPI twitter) {
-    tweets = twitter.getTweets();
+    tweets = Collections.unmodifiableList(twitter.getTweets());
   }
 
   @Override
   public void clearData() {
-    tweets.clear();
+    tweets = Collections.<Tweet> emptyList();
   }
 
   /**
