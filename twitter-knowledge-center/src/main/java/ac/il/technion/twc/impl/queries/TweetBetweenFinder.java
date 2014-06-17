@@ -17,7 +17,7 @@ import ac.il.technion.twc.api.visitor.Visitor;
 public class TweetBetweenFinder implements Visitor {
 
   private static SimpleDateFormat QUERY_DATE_FORMAT = new SimpleDateFormat(
-      "dd/MM/yyyy HH:mm:ss");
+      "dd/MM/yyyy HH:mm:ss"); //$NON-NLS-1$
   private List<Tweet> tweets;
 
   @Override
