@@ -8,7 +8,14 @@ import ac.il.technion.twc.api.Tweet;
 import ac.il.technion.twc.api.TwitterQueryAPI;
 import ac.il.technion.twc.api.visitor.Visitor;
 
-public class FisrtTweetFinder implements Visitor {
+/**
+ * Finds first (chronologically) tweet of a user.
+ * 
+ * 
+ * @author Ophir De Jager
+ * 
+ */
+public class FirstTweetFinder implements Visitor {
 
 	private List<Tweet> tweets;
 
@@ -23,6 +30,10 @@ public class FisrtTweetFinder implements Visitor {
 		tweets = Collections.<Tweet> emptyList();
 	}
 
+	/**
+	 * @param userID
+	 * @return Tweet ID or null if no tweets were found for user.
+	 */
 	public String getUserFirstTweet(final String userID) {
 		String $ = null;
 		Date firstDate = new Date(Long.MAX_VALUE);
