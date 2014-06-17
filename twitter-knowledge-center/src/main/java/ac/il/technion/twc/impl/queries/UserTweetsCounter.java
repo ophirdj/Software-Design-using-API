@@ -1,5 +1,6 @@
 package ac.il.technion.twc.impl.queries;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,10 +15,11 @@ import ac.il.technion.twc.api.visitor.Visitor;
  */
 public class UserTweetsCounter implements Visitor {
 
-  Map<Long, Integer> tweetsCountByUserId = new HashMap<>();
+  Map<Long, Integer> tweetsCountByUserId;
 
   @Override
   public void visit(final TwitterQueryAPI twitter) {
+    tweetsCountByUserId = new HashMap<>();
     for (final Tweet tweet : twitter.getTweets()) {
       final Long userId = tweet.getUserID();
       if (null == userId)
@@ -25,11 +27,12 @@ public class UserTweetsCounter implements Visitor {
       tweetsCountByUserId.put(userId,
           Integer.valueOf(1 + getTweetsCountOfUser(userId)));
     }
+    tweetsCountByUserId = Collections.unmodifiableMap(tweetsCountByUserId);
   }
 
   @Override
   public void clearData() {
-    tweetsCountByUserId.clear();
+    tweetsCountByUserId = Collections.<Long, Integer> emptyMap();
   }
 
   /**
