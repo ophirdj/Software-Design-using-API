@@ -26,6 +26,13 @@ public class OriginFinder implements Visitor {
 
 	private Map<String, String> relation;
 	private Map<String, Tweet> baseTweets;
+	
+	/**
+	 * 
+	 */
+	public OriginFinder() {
+		clearData();
+	}
 
 	@Override
 	public void visit(final TwitterQueryAPI twitter) {
