@@ -29,16 +29,15 @@ public class OriginFinder implements Visitor {
 	private Map<String, Tweet> baseTweets;
 
 	@Override
-	public void visit(TwitterQueryAPI twitter) {
-		List<Tweet> tweets = twitter.getTweets();
+	public void visit(final TwitterQueryAPI twitter) {
+		final List<Tweet> tweets = twitter.getTweets();
 		relation = new HashMap<>();
-		final Map<String, Tweet> buildingBaseTweetMap = new HashMap<String, Tweet>();
-		for (final Tweet tweet : tweets) {
+		final Map<String, Tweet> buildingBaseTweetMap = new HashMap<>();
+		for (final Tweet tweet : tweets)
 			if (!tweet.isRetweet())
 				buildingBaseTweetMap.put(tweet.getTweetID(), tweet);
 			else
 				relation.put(tweet.getTweetID(), tweet.getOriginalTweet());
-		}
 		baseTweets = Collections.unmodifiableMap(buildingBaseTweetMap);
 	}
 

@@ -20,7 +20,7 @@ public class StringTweetExtractor implements TweetExtractor{
         String id = extractID(s);
         Date date = extractDate(s);
 
-        Tweet tweet = new Tweet(id,originalID,date,hashtags);
+        Tweet tweet = new Tweet(id,originalID,date,hashtags, null);
         return tweet;
     }
 
