@@ -32,7 +32,7 @@ public class TweetToJSONConverterTest {
 		for(Integer i=0 ; i<SIZE ; i++)
 			insertionList.add(i, 
 					new Tweet("tweet"+i.toString(), null, 
-					new Date(1,1,1), Collections.EMPTY_LIST));
+					new Date(1,1,1), Collections.EMPTY_LIST, null));
 	}
 
 	@AfterClass

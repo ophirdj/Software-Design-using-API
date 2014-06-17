@@ -45,17 +45,17 @@ public class UnionFindTest {
 		d9 = new Date(54321, 9, 12);
 		d10 = new Date(99999, 9, 9);
 		
-		t1 = new Tweet(ID1_JESUS1, null, d1,empty);
-		t2 = new Tweet(ID2_NOW, null, d2,empty);
-		t3 = new Tweet(ID3_JESUS2, ID1_JESUS1, d3,empty);
-		t4 = new Tweet(ID4_BUG, null, d4,empty);
-		t5 = new Tweet(ID5_SATAN1, null, d5,empty);
-		t6 = new Tweet(ID6_SATAN2, ID5_SATAN1, d6,empty);
-		t7 = new Tweet(ID7_JESUS3, ID3_JESUS2, d7,empty);
-		t8 = new Tweet(ID8_SATAN3, ID6_SATAN2, d8,empty);
-		t9 = new Tweet(ID9_SATAN4, ID5_SATAN1, d9,empty);
-		t10 = new Tweet(ID10_END, ID2_NOW, d10,empty);
-		t11 = new Tweet("time_test", ID2_NOW, d10,empty);
+		t1 = new Tweet(ID1_JESUS1, null, d1,empty, null);
+		t2 = new Tweet(ID2_NOW, null, d2,empty, null);
+		t3 = new Tweet(ID3_JESUS2, ID1_JESUS1, d3,empty, null);
+		t4 = new Tweet(ID4_BUG, null, d4,empty, null);
+		t5 = new Tweet(ID5_SATAN1, null, d5,empty, null);
+		t6 = new Tweet(ID6_SATAN2, ID5_SATAN1, d6,empty, null);
+		t7 = new Tweet(ID7_JESUS3, ID3_JESUS2, d7,empty, null);
+		t8 = new Tweet(ID8_SATAN3, ID6_SATAN2, d8,empty, null);
+		t9 = new Tweet(ID9_SATAN4, ID5_SATAN1, d9,empty, null);
+		t10 = new Tweet(ID10_END, ID2_NOW, d10,empty, null);
+		t11 = new Tweet("time_test", ID2_NOW, d10,empty, null);
 		
 		underInspection.addElement(t1);
 		underInspection.addElement(t2);
@@ -106,7 +106,7 @@ public class UnionFindTest {
 	
 	@Test(expected = TweetNotFoundException.class)
 	public void searchForNoneExistendTweetShouldThrow(){
-		Tweet exceptional = new Tweet("fake mustache", "fake ID", new Date(),empty);
+		Tweet exceptional = new Tweet("fake mustache", "fake ID", new Date(),empty, null);
 		underInspection.getLatestRetweetTime("fake mustache");
 	}
 	

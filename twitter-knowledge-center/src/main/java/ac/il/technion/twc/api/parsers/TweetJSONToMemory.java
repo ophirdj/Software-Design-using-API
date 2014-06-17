@@ -52,7 +52,7 @@ public class TweetJSONToMemory implements TweetToMemory {
 			for (int i=0 ; i<htList.length(); i++)
 				hashTags.add(htList.getString(i));
 			
-			return new Tweet(id, origId, date, hashTags);
+			return new Tweet(id, origId, date, hashTags, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ParsingErrorException();

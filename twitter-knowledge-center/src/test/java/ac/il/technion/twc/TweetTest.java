@@ -22,9 +22,9 @@ public class TweetTest {
     static final String TWEET2_ID = "I love instagram!!! #love #instagram";
 
     private static final Tweet tweet = 
-    		new Tweet(TWEET1_ID, null, PAST, Collections.EMPTY_LIST);
+    		new Tweet(TWEET1_ID, null, PAST, Collections.EMPTY_LIST, null);
     private static final Tweet retweet = 
-    		new Tweet(TWEET2_ID, TWEET1_ID, FUTURE, Collections.EMPTY_LIST);
+    		new Tweet(TWEET2_ID, TWEET1_ID, FUTURE, Collections.EMPTY_LIST, null);
 
     @Test
     public void testGetTweetID() throws Exception {
