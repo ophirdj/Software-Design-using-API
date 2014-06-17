@@ -18,6 +18,13 @@ import ac.il.technion.twc.api.visitor.Visitor;
 public class FirstTweetFinder implements Visitor {
 
 	private List<Tweet> tweets;
+	
+	/**
+	 * 
+	 */
+	public FirstTweetFinder() {
+		clearData();
+	}
 
 	@Override
 	public void visit(final TwitterQueryAPI twitter) {
