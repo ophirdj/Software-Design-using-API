@@ -10,48 +10,79 @@ import java.util.List;
  */
 public class Tweet implements Serializable {
 	private final String tweetId;
-	private final String originalTweet;
+	private final String parentTweet;
 	private final Date tweetDate;
 	private final List<String> hashtags;
 	private final Long user;
 
+	/**
+	 * @param id
+	 * @param origin
+	 * @param date
+	 * @param hashtags
+	 * @param userID
+	 */
 	public Tweet(final String id, final String origin, final Date date,
 			final List<String> hashtags, final Long userID) {
 		tweetId = id;
 		tweetDate = date;
-		originalTweet = origin;
+		parentTweet = origin;
 		this.hashtags = Collections.unmodifiableList(hashtags);
 		user = userID;
 	}
 
+	/**
+	 * @return Tweet ID.
+	 */
 	public String getTweetID() {
 		return tweetId;
 	}
 
-	public String getOriginalTweet() {
-		return originalTweet;
+	/**
+	 * @return ID of parent tweet.
+	 */
+	public String getParentTweet() {
+		return parentTweet;
 	}
 
+	/**
+	 * @return True if tweet is retweet
+	 */
 	public boolean isRetweet() {
-		return originalTweet != null;
+		return parentTweet != null;
 	}
 
+	/**
+	 * @return Date of tweet.
+	 */
 	public Date getDate() {
 		return tweetDate;
 	}
 
+	/**
+	 * @return Date of tweet (as long value).
+	 */
 	public long getTime() {
 		return tweetDate.getTime();
 	}
 
+	/**
+	 * @return Day of tweet.
+	 */
 	public int getDay() {
 		return tweetDate.getDay();
 	}
 
+	/**
+	 * @return Tweet's hashtags.
+	 */
 	public List<String> getHashtags() {
 		return hashtags;
 	}
 
+	/**
+	 * @return Tweet's user ID or null if doesn't exist.
+	 */
 	public Long getUserID() {
 		return user;
 	}
@@ -70,8 +101,8 @@ public class Tweet implements Serializable {
 				|| !t1.tweetDate.equals(t2.tweetDate))
 			return false;
 		if (t1.isRetweet())
-			return t1.originalTweet.equals(t2.originalTweet);
-		return t2.originalTweet == null;
+			return t1.parentTweet.equals(t2.parentTweet);
+		return t2.parentTweet == null;
 	}
 
 }

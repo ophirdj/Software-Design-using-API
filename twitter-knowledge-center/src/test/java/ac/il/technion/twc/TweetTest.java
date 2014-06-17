@@ -34,12 +34,12 @@ public class TweetTest {
 
     @Test
     public void testGetOriginalTweetForRetweet() throws Exception {
-        assertEquals(TWEET1_ID, retweet.getOriginalTweet());
+        assertEquals(TWEET1_ID, retweet.getParentTweet());
     }
 
     @Test
     public void testGetOriginalTweetForOriginalReturnsNull() throws Exception {
-        assertNull(tweet.getOriginalTweet());
+        assertNull(tweet.getParentTweet());
     }
 
     @Test

@@ -42,7 +42,7 @@ public class StringTweetExtractorTest {
 
         Tweet t1 = stringTweetExtractor.extractTweet(s1);
 
-        assertEquals(t1.getOriginalTweet(),originalID1);
+        assertEquals(t1.getParentTweet(),originalID1);
         assertFalse(t1.isRetweet());
         assertEquals(t1.getDate(),d1);
         assertEquals(t1.getDay(),d1.getDay());
@@ -56,7 +56,7 @@ public class StringTweetExtractorTest {
         Tweet t2 = stringTweetExtractor.extractTweet(s2);
 
 
-        assertEquals(t2.getOriginalTweet(),originalID2);
+        assertEquals(t2.getParentTweet(),originalID2);
         assertTrue(t2.isRetweet());
         assertEquals(t2.getDate(),d2);
         assertEquals(t2.getDay(),d2.getDay());

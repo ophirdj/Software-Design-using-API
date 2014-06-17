@@ -2,7 +2,6 @@ package ac.il.technion.twc.impl.queries;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import ac.il.technion.twc.api.Tweet;
@@ -30,14 +29,13 @@ public class OriginFinder implements Visitor {
 
 	@Override
 	public void visit(final TwitterQueryAPI twitter) {
-		final List<Tweet> tweets = twitter.getTweets();
 		relation = new HashMap<>();
 		final Map<String, Tweet> buildingBaseTweetMap = new HashMap<>();
-		for (final Tweet tweet : tweets)
+		for (final Tweet tweet : twitter.getTweets())
 			if (!tweet.isRetweet())
 				buildingBaseTweetMap.put(tweet.getTweetID(), tweet);
 			else
-				relation.put(tweet.getTweetID(), tweet.getOriginalTweet());
+				relation.put(tweet.getTweetID(), tweet.getParentTweet());
 		baseTweets = Collections.unmodifiableMap(buildingBaseTweetMap);
 	}
 

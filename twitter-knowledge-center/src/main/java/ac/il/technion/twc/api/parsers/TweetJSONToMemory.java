@@ -31,7 +31,7 @@ public class TweetJSONToMemory implements TweetToMemory {
 		
 		JSONObject $ = new JSONObject();
 		$.put(ID_FIELD, t.getTweetID())
-			.put(RETWEET_FIELD, t.getOriginalTweet())
+			.put(RETWEET_FIELD, t.getParentTweet())
 			.put(DATE_FIELD, dateFormat.format(t.getDate()))
 			.put(HASHTAG_FIELD,t.getHashtags());
 		

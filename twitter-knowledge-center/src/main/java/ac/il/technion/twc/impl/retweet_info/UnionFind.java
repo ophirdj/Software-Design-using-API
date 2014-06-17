@@ -79,7 +79,7 @@ public class UnionFind implements RetweetQueryEngine{
     	for(String id : disjointSets.keySet()){
     		Tweet t = disjointSets.get(id).content;
     		if(t.isRetweet())
-    			union(t.getOriginalTweet(),id);
+    			union(t.getParentTweet(),id);
     	}
     }
     

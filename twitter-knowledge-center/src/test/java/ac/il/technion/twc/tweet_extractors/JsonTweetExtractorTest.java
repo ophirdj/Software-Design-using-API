@@ -37,7 +37,7 @@ public class JsonTweetExtractorTest {
 
         assertEquals(t.getTweetID(),id1);
         assertFalse(t.isRetweet());
-        assertNull(t.getOriginalTweet());
+        assertNull(t.getParentTweet());
         
         assertNotNull(t.getDate()); // I can't reason with this cursed date format.
         assertNotNull(t.getDay()); // but at least I can check that it's interpreted somehow.
@@ -55,7 +55,7 @@ public class JsonTweetExtractorTest {
         Tweet t = underInspection.extractTweet(json2);
 
         assertEquals(t.getTweetID(),id2);
-        assertEquals(t.getOriginalTweet(), id1);
+        assertEquals(t.getParentTweet(), id1);
         assertTrue(t.isRetweet());
         assertNotNull(t.getDate());
         assertNotNull(t.getDay()); 
@@ -65,7 +65,7 @@ public class JsonTweetExtractorTest {
         t = underInspection.extractTweet(json3);
 
         assertEquals(t.getTweetID(),id3);
-        assertEquals(t.getOriginalTweet(), id1);
+        assertEquals(t.getParentTweet(), id1);
         assertTrue(t.isRetweet());
         assertNotNull(t.getDate());
         assertNotNull(t.getDay()); 
