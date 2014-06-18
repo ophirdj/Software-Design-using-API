@@ -40,7 +40,7 @@ public class RetweetCounterTest {
 
 	@Test
 	public final void counterCountsNumberOfRetweets() {
-		assertEquals(3, $.getRetweetCount("base 1"));
+		assertEquals(2, $.getRetweetCount("base 1"));
 	}
 
 }
