@@ -71,7 +71,7 @@ public class TweetBetweenFinder implements Visitor {
    * @throws ParseException
    *           if the string is not a valid date
    */
-  public static Date fromString(final String str) throws ParseException {
+  public static Date dateFromString(final String str) throws ParseException {
     return QUERY_DATE_FORMAT.parse(str);
   }
 

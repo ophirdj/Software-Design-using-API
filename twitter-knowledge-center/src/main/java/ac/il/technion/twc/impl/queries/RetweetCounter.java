@@ -42,9 +42,9 @@ public class RetweetCounter implements Visitor {
       if (tweet.isRetweet())
         continue;
       try {
-        final Tweet base = finder.origin(tweet);
-        retweetsCountById.put(base.getTweetID(),
-            Integer.valueOf(1 + getRetweetCount(base.getTweetID())));
+        final String baseId = finder.origin(tweet.getTweetID());
+        retweetsCountById.put(baseId,
+            Integer.valueOf(1 + getRetweetCount(baseId)));
       } catch (final NotFoundException e) {
         continue;
       }
