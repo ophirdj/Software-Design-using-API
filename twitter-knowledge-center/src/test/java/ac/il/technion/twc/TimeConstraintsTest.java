@@ -14,10 +14,10 @@ import org.junit.Test;
  */
 public class TimeConstraintsTest {
 
-  private static final int BASE_TWEETS = 2000;
-  private static final String[] lines = TestUtils.generateTweets(BASE_TWEETS,
-      5, 3, 0);
-  private static final int linesLengthApproximation = 312000;
+	private static final int BASE_TWEETS = 2000;
+	private static final String[] lines = TestUtils.generateTweets(BASE_TWEETS,
+			5, 3, 0, 0);
+	private static final int linesLengthApproximation = 312000;
 
   // imported data but didn't set up index
   private final FunctionalityTester tkcSetupIndex = new FunctionalityTester();
