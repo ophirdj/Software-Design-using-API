@@ -18,7 +18,7 @@ import ac.il.technion.twc.api.visitor.Visitor;
 public class FirstTweetFinder implements Visitor {
 
 	private List<Tweet> tweets;
-	
+
 	/**
 	 * 
 	 */
@@ -29,7 +29,6 @@ public class FirstTweetFinder implements Visitor {
 	@Override
 	public void visit(final TwitterQueryAPI twitter) {
 		tweets = Collections.unmodifiableList(twitter.getTweets());
-
 	}
 
 	@Override
@@ -48,9 +47,8 @@ public class FirstTweetFinder implements Visitor {
 		String $ = null;
 		Date firstDate = new Date(Long.MAX_VALUE);
 		for (final Tweet tweet : tweets)
-			if (tweet.getUserID() != null
-					&& tweet.getUserID().toString().equals(userID)
-					&& !firstDate.after(tweet.getDate())) {
+			if (tweet.getUserID() != null && tweet.getUserID().equals(userID)
+					&& !tweet.getDate().after(firstDate)) {
 				firstDate = tweet.getDate();
 				$ = tweet.getTweetID();
 			}

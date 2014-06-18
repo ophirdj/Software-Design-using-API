@@ -27,7 +27,8 @@ public class Tweet implements Serializable {
 		tweetId = id;
 		tweetDate = date;
 		parentTweet = origin;
-		this.hashtags = Collections.unmodifiableList(hashtags);
+		this.hashtags = hashtags == null ? Collections.<String> emptyList()
+				: Collections.unmodifiableList(hashtags);
 		user = userID;
 	}
 
