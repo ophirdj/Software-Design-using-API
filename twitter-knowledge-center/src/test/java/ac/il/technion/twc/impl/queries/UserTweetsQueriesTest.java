@@ -15,12 +15,12 @@ import ac.il.technion.twc.api.Tweet;
 import ac.il.technion.twc.api.TwitterQueryAPI;
 
 /**
- * Test class for {@link FirstTweetFinderTest}.
+ * Test class for {@link UserTweetsQueries}.
  * 
  * @author Ophir De Jager
  * 
  */
-public class FirstTweetFinderTest {
+public class UserTweetsQueriesTest {
 
 	private final UserTweetsQueries $ = new UserTweetsQueries();
 
@@ -43,36 +43,28 @@ public class FirstTweetFinderTest {
 	}
 
 	/**
-	 * Test method for {@link UserTweetsQueries#getUserFirstTweet(String)}.
+	 * Tests method for {@link UserTweetsQueries#getTweetsCountOfUser(String)}.
 	 */
 	@Test
-	public final void firstTweetShouldReturnFirstTweet() {
-		assertEquals("base 1", $.getUserFirstTweet("Ophir"));
+	public final void getTweetsCountOfUserShouldReturnNumberOfTweetsUserHas() {
+		assertEquals(2, $.getTweetsCountOfUser("Ophir"));
 	}
 
 	/**
-	 * Test method for {@link UserTweetsQueries#getUserFirstTweet(String)}.
+	 * Tests method for {@link UserTweetsQueries#getTweetsCountOfUser(String)}.
 	 */
 	@Test
-	public final void firstTweetShouldReturnFirstTweetEvenIfRetweet() {
-		assertEquals("re: some tweet", $.getUserFirstTweet("Ziv"));
+	public final void getTweetsCountOfNonExistingUserShouldReturn0() {
+		assertEquals(0, $.getTweetsCountOfUser("I am not even a user"));
 	}
 
 	/**
-	 * Test method for {@link UserTweetsQueries#getUserFirstTweet(String)}.
+	 * Tests method for {@link UserTweetsQueries#clearData()}.
 	 */
-	@Test(expected = UserTweetsQueries.NotFoundException.class)
-	public final void firstTweetOfUserThatDoesntExistShouldThrow() {
-		$.getUserFirstTweet("I am not a user");
-	}
-
-	/**
-	 * Test method for {@link UserTweetsQueries#clearData()}.
-	 */
-	@Test(expected = UserTweetsQueries.NotFoundException.class)
-	public final void clearDataShouldClearAllTweets() {
+	@Test
+	public final void getTweetsCountOfUserAfterClearDataShouldReturn0() {
 		$.clearData();
-		$.getUserFirstTweet("Ophir");
+		assertEquals(0, $.getTweetsCountOfUser("Ziv"));
 	}
 
 }
