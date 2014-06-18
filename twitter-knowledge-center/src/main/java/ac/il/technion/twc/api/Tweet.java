@@ -13,7 +13,7 @@ public class Tweet implements Serializable {
 	private final String parentTweet;
 	private final Date tweetDate;
 	private final List<String> hashtags;
-	private final Long user;
+	private final String user;
 
 	/**
 	 * @param id
@@ -23,7 +23,7 @@ public class Tweet implements Serializable {
 	 * @param userID
 	 */
 	public Tweet(final String id, final String origin, final Date date,
-			final List<String> hashtags, final Long userID) {
+			final List<String> hashtags, final String userID) {
 		tweetId = id;
 		tweetDate = date;
 		parentTweet = origin;
@@ -83,7 +83,7 @@ public class Tweet implements Serializable {
 	/**
 	 * @return Tweet's user ID or null if doesn't exist.
 	 */
-	public Long getUserID() {
+	public String getUserID() {
 		return user;
 	}
 

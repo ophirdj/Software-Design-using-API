@@ -28,15 +28,15 @@ public class JsonTweetExtractor implements TweetExtractor {
 
 		final Long id = stat.getId();
 		final Status orig = stat.getRetweetedStatus();
-		final String origId = orig == null ? null : ((Long) orig.getId())
+		final String origId = orig == null ? null : Long.valueOf(orig.getId())
 				.toString();
 		final String txt = stat.getText();
 		final List<String> hashTags = new Extractor().extractHashtags(txt);
 		final Date d = stat.getCreatedAt();
 		final User user = stat.getUser();
-		Long userID = null;
+		String userID = null;
 		if (user != null)
-			userID = Long.valueOf(user.getId());
+			userID = Long.toString(user.getId());
 		return new Tweet(id.toString(), origId, stat.getCreatedAt(), hashTags,
 				userID);
 	}

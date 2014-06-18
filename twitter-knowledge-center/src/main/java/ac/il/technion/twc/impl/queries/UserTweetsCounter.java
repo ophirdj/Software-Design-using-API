@@ -15,34 +15,34 @@ import ac.il.technion.twc.api.visitor.Visitor;
  */
 public class UserTweetsCounter implements Visitor {
 
-  Map<Long, Integer> tweetsCountByUserId;
+	Map<String, Integer> tweetsCountByUserId;
 
-  @Override
-  public void visit(final TwitterQueryAPI twitter) {
-    tweetsCountByUserId = new HashMap<>();
-    for (final Tweet tweet : twitter.getTweets()) {
-      final Long userId = tweet.getUserID();
-      if (null == userId)
-        continue;
-      tweetsCountByUserId.put(userId,
-          Integer.valueOf(1 + getTweetsCountOfUser(userId)));
-    }
-    tweetsCountByUserId = Collections.unmodifiableMap(tweetsCountByUserId);
-  }
+	@Override
+	public void visit(final TwitterQueryAPI twitter) {
+		tweetsCountByUserId = new HashMap<>();
+		for (final Tweet tweet : twitter.getTweets()) {
+			final String userId = tweet.getUserID();
+			if (null == userId)
+				continue;
+			tweetsCountByUserId.put(userId,
+					Integer.valueOf(1 + getTweetsCountOfUser(userId)));
+		}
+		tweetsCountByUserId = Collections.unmodifiableMap(tweetsCountByUserId);
+	}
 
-  @Override
-  public void clearData() {
-    tweetsCountByUserId = Collections.<Long, Integer> emptyMap();
-  }
+	@Override
+	public void clearData() {
+		tweetsCountByUserId = Collections.<String, Integer> emptyMap();
+	}
 
-  /**
-   * @param userId
-   *          The id of the user
-   * @return the number of tweets he/she posted
-   */
-  public int getTweetsCountOfUser(final Long userId) {
-    return tweetsCountByUserId.containsKey(userId) ? 0 : tweetsCountByUserId
-        .get(userId).intValue();
-  }
+	/**
+	 * @param userId
+	 *            The id of the user
+	 * @return the number of tweets he/she posted
+	 */
+	public int getTweetsCountOfUser(final String userId) {
+		return !tweetsCountByUserId.containsKey(userId) ? 0
+				: tweetsCountByUserId.get(userId).intValue();
+	}
 
 }
