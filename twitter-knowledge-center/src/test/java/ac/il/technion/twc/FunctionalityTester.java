@@ -5,7 +5,7 @@ import java.util.List;
 
 import ac.il.technion.twc.api.TwitterKnowledgeCenter;
 import ac.il.technion.twc.api.TwitterQueryAPI;
-import ac.il.technion.twc.api.parsers.TweetJSONToMemory;
+import ac.il.technion.twc.api.parsers.TweetStringToMemory;
 import ac.il.technion.twc.api.tweet_extractors.JsonTweetExtractor;
 import ac.il.technion.twc.api.tweet_extractors.StringTweetExtractor;
 import ac.il.technion.twc.api.visitor.Visitor;
@@ -34,7 +34,7 @@ public class FunctionalityTester {
   HashtagsHighestCouplingFinder hashtagsHighestCouplingFinder =
       new HashtagsHighestCouplingFinder();
 
-  TwitterQueryAPI tkc = new TwitterKnowledgeCenter(new TweetJSONToMemory());
+  TwitterQueryAPI tkc = new TwitterKnowledgeCenter(new TweetStringToMemory());
 
   List<Visitor> queries = new ArrayList<>();
 

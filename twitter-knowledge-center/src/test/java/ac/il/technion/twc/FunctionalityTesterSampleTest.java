@@ -21,6 +21,12 @@ public class FunctionalityTesterSampleTest {
     $.cleanPersistentData();
   }
 
+  // @Test
+  // public final void sampleTest() throws Exception {
+  // $.importDataJson(new String[] { JSONTweetsMessages.getString("Sample1") });
+  // $.setupIndex();
+  // }
+
   @Test
   public final void sampleTest1() throws Exception {
     $.importData(new String[] {
@@ -42,7 +48,6 @@ public class FunctionalityTesterSampleTest {
     assertArrayEquals(new String[] { "aaa,bbb" }, $.hashtagCoupling(1));
     assertArrayEquals(new String[] { "aaa,bbb", "bbb,ccc" },
         $.hashtagCoupling(3));
-
   }
 
 }
