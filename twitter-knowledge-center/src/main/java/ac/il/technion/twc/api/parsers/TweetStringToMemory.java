@@ -12,6 +12,16 @@ import ac.il.technion.twc.api.exceptions.ParsingErrorException;
 import ac.il.technion.twc.api.file_io.FileWriterReader;
 import ac.il.technion.twc.api.file_io.WriterReader;
 
+/**
+ * Custom made format for tweet. Faster to parse and recover
+ * 
+ * @author Ziv Ronen
+ * @date 18.06.2014
+ * @mail akarks@gmail.com
+ * 
+ * @version 2.1
+ * @since 2.1
+ */
 public class TweetStringToMemory implements TweetToMemory {
   static final String ID_FIELD = "id_str";
   static final String DATE_FIELD = "created_at";
@@ -26,7 +36,7 @@ public class TweetStringToMemory implements TweetToMemory {
 
   WriterReader fileHandler = new FileWriterReader(JSON_PATH);
 
-  public String encode(final Tweet t) {
+  private static String encode(final Tweet t) {
     return new StringBuilder(t.getTweetID()).append(DELIMITER)
         .append(storeNullAble(t.getParentTweet())).append(DELIMITER)
         .append(dateFormat.format(t.getDate())).append(DELIMITER)
@@ -47,7 +57,7 @@ public class TweetStringToMemory implements TweetToMemory {
     return builder.toString();
   }
 
-  public Tweet decode(final String s) {
+  private static Tweet decode(final String s) {
     final String[] fields = s.split(DELIMITER);
     try {
       return new Tweet(fields[0], loadNullAble(fields[1]),
@@ -71,7 +81,7 @@ public class TweetStringToMemory implements TweetToMemory {
 
   @Override
   public void reserve(final List<Tweet> tweets) {
-    final List<String> encodedTweets = new LinkedList<String>();
+    final List<String> encodedTweets = new LinkedList<>();
     for (final Tweet t : tweets)
       encodedTweets.add(encode(t));
     try {
@@ -85,7 +95,7 @@ public class TweetStringToMemory implements TweetToMemory {
   @Override
   public List<Tweet> recover() {
     try {
-      final List<Tweet> decodedTweets = new LinkedList<Tweet>();
+      final List<Tweet> decodedTweets = new LinkedList<>();
       for (final String s : fileHandler.read())
         decodedTweets.add(decode(s));
       return decodedTweets;
@@ -98,7 +108,6 @@ public class TweetStringToMemory implements TweetToMemory {
   @Override
   public void clear() {
     fileHandler.clean();
-
   }
 
 }

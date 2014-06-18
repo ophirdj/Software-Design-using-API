@@ -1,6 +1,5 @@
 package ac.il.technion.twc.api.visitor;
 
-
 import ac.il.technion.twc.api.TwitterQueryAPI;
 
 /**
@@ -8,13 +7,16 @@ import ac.il.technion.twc.api.TwitterQueryAPI;
  */
 public interface Visitor {
 
-    /**
-     * Check out @Visitable accept javadoc.
-     */
-    void visit(TwitterQueryAPI twitter);
+  /**
+   * Check out @Visitable accept javadoc.
+   * 
+   * @param twitter
+   *          the {@link TwitterQueryAPI}
+   */
+  void visit(TwitterQueryAPI twitter);
 
-    /**
-     * Clears the data that the current visitor holds (i.e data bases)
-     */
-    void clearData();
+  /**
+   * Clears the data that the current visitor holds (i.e data bases)
+   */
+  void clearData();
 }

@@ -9,6 +9,10 @@ import java.util.List;
  * Created by Matan on 5/7/14.
  */
 public class Tweet implements Serializable {
+  /**
+   * 
+   */
+  private static final long serialVersionUID = -1862690052850977769L;
   private final String tweetId;
   private final String parentTweet;
   private final Date tweetDate;
@@ -71,6 +75,7 @@ public class Tweet implements Serializable {
   /**
    * @return Day of tweet.
    */
+  @SuppressWarnings("deprecation")
   public int getDay() {
     return tweetDate.getDay();
   }

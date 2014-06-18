@@ -1,6 +1,5 @@
 package ac.il.technion.twc.api.tweet_extractors;
 
-import java.util.Date;
 import java.util.List;
 
 import twitter4j.Status;
@@ -26,13 +25,12 @@ public class JsonTweetExtractor implements TweetExtractor {
       throw new ParsingErrorException();
     }
 
-    final Long id = stat.getId();
+    final Long id = Long.valueOf(stat.getId());
     final Status orig = stat.getRetweetedStatus();
     final String origId =
         orig == null ? null : Long.valueOf(orig.getId()).toString();
     final String txt = stat.getText();
     final List<String> hashTags = new Extractor().extractHashtags(txt);
-    final Date d = stat.getCreatedAt();
     final User user = stat.getUser();
     String userID = null;
     if (user != null)

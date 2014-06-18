@@ -14,6 +14,9 @@ import ac.il.technion.twc.api.exceptions.ParsingErrorException;
 import ac.il.technion.twc.api.file_io.FileWriterReader;
 import ac.il.technion.twc.api.file_io.WriterReader;
 
+/**
+ * Write tweet to memory in Json format
+ */
 public class TweetJSONToMemory implements TweetToMemory {
   static final String ID_FIELD = "id_str";
   static final String DATE_FIELD = "created_at";
@@ -27,7 +30,12 @@ public class TweetJSONToMemory implements TweetToMemory {
 
   WriterReader fileHandler = new FileWriterReader(JSON_PATH);
 
-  public String encode(final Tweet t) {
+  /**
+   * @param t
+   *          tweet
+   * @return string that represent a tweet
+   */
+  public static String encode(final Tweet t) {
     return new JSONObject().put(ID_FIELD, t.getTweetID())
         .put(RETWEET_FIELD, t.getParentTweet())
         .put(DATE_FIELD, dateFormat.format(t.getDate()))
@@ -35,9 +43,14 @@ public class TweetJSONToMemory implements TweetToMemory {
         .toString();
   }
 
-  public Tweet decode(final String s) {
+  /**
+   * @param s
+   *          string that represent a tweet
+   * @return the tweet s represent
+   */
+  public static Tweet decode(final String s) {
     try {
-      final List<String> hashTags = new LinkedList<String>();
+      final List<String> hashTags = new LinkedList<>();
 
       final JSONObject obj = new JSONObject(s);
 
@@ -59,13 +72,9 @@ public class TweetJSONToMemory implements TweetToMemory {
     }
   }
 
-  public String getDelimiter() {
-    return DELIMITER;
-  }
-
   @Override
   public void reserve(final List<Tweet> tweets) {
-    final List<String> encodedTweets = new LinkedList<String>();
+    final List<String> encodedTweets = new LinkedList<>();
     for (final Tweet t : tweets)
       encodedTweets.add(encode(t));
     try {
@@ -79,7 +88,7 @@ public class TweetJSONToMemory implements TweetToMemory {
   @Override
   public List<Tweet> recover() {
     try {
-      final List<Tweet> decodedTweets = new LinkedList<Tweet>();
+      final List<Tweet> decodedTweets = new LinkedList<>();
       for (final String s : fileHandler.read())
         decodedTweets.add(decode(s));
       return decodedTweets;
@@ -92,7 +101,6 @@ public class TweetJSONToMemory implements TweetToMemory {
   @Override
   public void clear() {
     fileHandler.clean();
-
   }
 
 }

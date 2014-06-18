@@ -3,6 +3,7 @@ package ac.il.technion.twc.api;
 import java.util.LinkedList;
 import java.util.List;
 
+import ac.il.technion.twc.FunctionalityTester;
 import ac.il.technion.twc.api.parsers.TweetToMemory;
 import ac.il.technion.twc.api.tweet_extractors.TweetExtractor;
 import ac.il.technion.twc.api.visitor.Visitor;
@@ -45,11 +46,8 @@ public class TwitterKnowledgeCenter implements TwitterQueryAPI {
 
   /**
    * Loads the index, allowing for queries on the data that was imported using
-   * {@link TwitterKnowledgeCenter#importData(String[])}. setupIndex will be
-   * called before any queries can be run on the system
-   * 
-   * @throws Exception
-   *           If for any reason, loading the index failed
+   * {@link FunctionalityTester#importData(String[])}. setupIndex will be called
+   * before any queries can be run on the system
    */
   @Override
   public void setupIndex(final List<Visitor> visitors) {

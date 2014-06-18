@@ -15,7 +15,7 @@ import ac.il.technion.twc.api.Tweet;
 import ac.il.technion.twc.api.TwitterQueryAPI;
 
 /**
- * Test class for {@link FirstTweetFinder}.
+ * Test class for {@link FirstTweetFinderTest}.
  * 
  * @author Ophir De Jager
  * 
@@ -42,7 +42,7 @@ public class FirstTweetFinderTest {
   }
 
   /**
-   * Test method for {@link FirstTweetFinder#getUserFirstTweet(String)}.
+   * Test method for {@link UserTweetsQueries#getUserFirstTweet(String)}.
    */
   @Test
   public final void firstTweetShouldReturnFirstTweet() {
@@ -50,7 +50,7 @@ public class FirstTweetFinderTest {
   }
 
   /**
-   * Test method for {@link FirstTweetFinder#getUserFirstTweet(String)}.
+   * Test method for {@link UserTweetsQueries#getUserFirstTweet(String)}.
    */
   @Test
   public final void firstTweetShouldReturnFirstTweetEvenIfRetweet() {
@@ -58,7 +58,7 @@ public class FirstTweetFinderTest {
   }
 
   /**
-   * Test method for {@link FirstTweetFinder#getUserFirstTweet(String)}.
+   * Test method for {@link UserTweetsQueries#getUserFirstTweet(String)}.
    */
   @Test(expected = UserTweetsQueries.NotFoundException.class)
   public final void firstTweetOfUserThatDoesntExistShouldThrow() {
@@ -66,7 +66,7 @@ public class FirstTweetFinderTest {
   }
 
   /**
-   * Test method for {@link FirstTweetFinder#clearData()}.
+   * Test method for {@link UserTweetsQueries#clearData()}.
    */
   @Test(expected = UserTweetsQueries.NotFoundException.class)
   public final void clearDataShouldClearAllTweets() {

@@ -60,7 +60,7 @@ public class TimeConstraintsTest {
   }
 
   /**
-   * Test method for {@link FuntionalityTester#setupIndex()}
+   * Test method for {@link FunctionalityTester#setupIndex()}
    * 
    * @throws Exception
    */

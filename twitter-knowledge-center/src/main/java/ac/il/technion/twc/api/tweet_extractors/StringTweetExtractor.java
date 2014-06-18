@@ -11,69 +11,62 @@ import ac.il.technion.twc.api.Tweet;
 /**
  * Created by Matan on 5/8/14.
  */
-public class StringTweetExtractor implements TweetExtractor{
+public class StringTweetExtractor implements TweetExtractor {
 
-    @Override
-    public Tweet extractTweet(String s) {
-        String originalID =extractOriginalTweetID(s);
-        List<String> hashtags = extractHashtags(s);
-        String id = extractID(s);
-        Date date = extractDate(s);
+  @Override
+  public Tweet extractTweet(final String s) {
+    final String originalID = extractOriginalTweetID(s);
+    final List<String> hashtags = Collections.emptyList();
+    final String id = extractID(s);
+    final Date date = extractDate(s);
 
-        Tweet tweet = new Tweet(id,originalID,date,hashtags, null);
-        return tweet;
+    final Tweet tweet = new Tweet(id, originalID, date, hashtags, null);
+    return tweet;
+  }
+
+  private static String extractOriginalTweetID(final String tweet) {
+    final String[] tweetString = splitTweetString(tweet);
+    try {
+      return tweetString[POSITION.ORIGINAL_TWEET_POSITION.getPosition()];
+    } catch (final ArrayIndexOutOfBoundsException e) {
+      return null;
+    }
+  }
+
+  private static String extractID(final String tweet) {
+    final String[] tweetString = splitTweetString(tweet);
+
+    // Removes unwanted space character at the beginning
+    return tweetString[POSITION.ID_POSITION.getPosition()];
+  }
+
+  private static Date extractDate(final String tweet) {
+    final String[] tweetString = splitTweetString(tweet);
+    final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    try {
+      return format.parse(tweetString[POSITION.DATE_POSITION.getPosition()]);
+    } catch (final ParseException e) {
+      // e.printStackTrace();
+      return null;
+    }
+  }
+
+  private static String[] splitTweetString(final String tweet) {
+    return tweet.split(", ");
+  }
+
+  private enum POSITION {
+    DATE_POSITION(0), ID_POSITION(1), ORIGINAL_TWEET_POSITION(2);
+
+    private final int position;
+
+    POSITION(final int position) {
+      this.position = position;
     }
 
-    private String extractOriginalTweetID(String tweet) {
-    	int pos = POSITION.ORIGINAL_TWEET_POSITION.getPosition();
-        String[] tweetString = splitTweetString(tweet);
-        try {
-        	return tweetString[POSITION.ORIGINAL_TWEET_POSITION.getPosition()];
-        } catch(ArrayIndexOutOfBoundsException e){
-        	return null;
-        }
+    int getPosition() {
+      return position;
     }
-
-    private List<String> extractHashtags(String s) {
-        return Collections.EMPTY_LIST;
-    }
-
-    private String extractID(String tweet) {
-        String[] tweetString = splitTweetString(tweet);
-
-        //Removes unwanted space character at the beginning
-        return tweetString[POSITION.ID_POSITION.getPosition()];
-    }
-
-    private Date extractDate(String tweet) {
-        String[] tweetString = splitTweetString(tweet);
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        try {
-            return format.parse(tweetString[POSITION.DATE_POSITION.getPosition()]);
-        } catch (ParseException e) {
-//            e.printStackTrace();
-            return null;
-        }
-    }
-
-
-
-    private static String[] splitTweetString(String tweet) {
-        return tweet.split(", ");
-    }
-
-    private enum POSITION {
-        DATE_POSITION(0), ID_POSITION(1), ORIGINAL_TWEET_POSITION(2);
-
-        private final int position;
-
-        POSITION(int position) {
-            this.position = position;
-        }
-
-        int getPosition() {
-            return this.position;
-        }
-    }
+  }
 
 }
