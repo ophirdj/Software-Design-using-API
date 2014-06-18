@@ -40,7 +40,7 @@ public class RetweetCounter implements Visitor {
   public void init(final OriginFinder finder) {
     retweetsCountById = new HashMap<>();
     for (final Tweet tweet : tweets) {
-      if (tweet.isRetweet())
+      if (!tweet.isRetweet())
         continue;
       try {
         final String baseId = finder.origin(tweet.getTweetID());
