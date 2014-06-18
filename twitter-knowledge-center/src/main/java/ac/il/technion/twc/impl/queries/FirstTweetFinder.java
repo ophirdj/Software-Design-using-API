@@ -17,55 +17,54 @@ import ac.il.technion.twc.api.visitor.Visitor;
  */
 public class FirstTweetFinder implements Visitor {
 
-	private List<Tweet> tweets;
-	
-	/**
+  private List<Tweet> tweets;
+
+  /**
 	 * 
 	 */
-	public FirstTweetFinder() {
-		clearData();
-	}
+  public FirstTweetFinder() {
+    clearData();
+  }
 
-	@Override
-	public void visit(final TwitterQueryAPI twitter) {
-		tweets = Collections.unmodifiableList(twitter.getTweets());
+  @Override
+  public void visit(final TwitterQueryAPI twitter) {
+    tweets = Collections.unmodifiableList(twitter.getTweets());
 
-	}
+  }
 
-	@Override
-	public void clearData() {
-		tweets = Collections.<Tweet> emptyList();
-	}
+  @Override
+  public void clearData() {
+    tweets = Collections.<Tweet> emptyList();
+  }
 
-	/**
-	 * @param userID
-	 * @return Tweet ID of first tweet of user.
-	 * @throws NotFoundException
-	 *             If no tweets were found for this user.
-	 */
-	public String getUserFirstTweet(final String userID)
-			throws NotFoundException {
-		String $ = null;
-		Date firstDate = new Date(Long.MAX_VALUE);
-		for (final Tweet tweet : tweets)
-			if (tweet.getUserID() != null
-					&& tweet.getUserID().toString().equals(userID)
-					&& !firstDate.after(tweet.getDate())) {
-				firstDate = tweet.getDate();
-				$ = tweet.getTweetID();
-			}
-		if ($ == null)
-			throw new NotFoundException();
-		return $;
-	}
+  /**
+   * @param userID
+   * @return Tweet ID of first tweet of user.
+   * @throws NotFoundException
+   *           If no tweets were found for this user.
+   */
+  public String getUserFirstTweet(final String userID) throws NotFoundException {
+    String $ = null;
+    Date firstDate = new Date(Long.MAX_VALUE);
+    for (final Tweet tweet : tweets)
+      if (tweet.getUserID() != null
+          && tweet.getUserID().toString().equals(userID)
+          && firstDate.after(tweet.getDate())) {
+        firstDate = tweet.getDate();
+        $ = tweet.getTweetID();
+      }
+    if ($ == null)
+      throw new NotFoundException();
+    return $;
+  }
 
-	/**
-	 * @author Ophir De Jager
-	 * 
-	 */
-	public static class NotFoundException extends RuntimeException {
+  /**
+   * @author Ophir De Jager
+   * 
+   */
+  public static class NotFoundException extends RuntimeException {
 
-		private static final long serialVersionUID = 2792149936612616492L;
-	}
+    private static final long serialVersionUID = 2792149936612616492L;
+  }
 
 }

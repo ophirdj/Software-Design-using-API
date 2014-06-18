@@ -27,7 +27,7 @@ public class HashtagsHighestCouplingFinder implements Visitor {
   public void visit(final TwitterQueryAPI twitter) {
     final Map<CoupledTweets, Integer> map = new HashMap<>();
     for (final Tweet tweet : twitter.getTweets())
-      for (int i = 0; i < tweet.getHashtags().size(); i++) {
+      for (int i = 0; i < tweet.getHashtags().size() - 1; i++) {
         final String hashtag1 = tweet.getHashtags().get(i);
         for (final String hashtag2 : tweet.getHashtags().subList(i + 1,
             tweet.getHashtags().size() - 1)) {

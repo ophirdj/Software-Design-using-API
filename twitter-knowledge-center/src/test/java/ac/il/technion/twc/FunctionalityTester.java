@@ -124,7 +124,7 @@ public class FunctionalityTester {
       throws Exception {
     return tweetBetweenFinder.findTweetBetween(
         TweetBetweenFinder.dateFromString(t1),
-        TweetBetweenFinder.dateFromString(t1));
+        TweetBetweenFinder.dateFromString(t2));
   }
 
   /**
