@@ -1,5 +1,6 @@
 package ac.il.technion.twc;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
@@ -36,6 +37,12 @@ public class FunctionalityTesterSampleTest {
     assertEquals("255362623626", $.getFirstTweet("123"));
     assertEquals("2", $.numberTweetsByUser("123"));
     assertEquals("1", $.numberTweetsByUser("456"));
+    assertArrayEquals(new String[] { "aaa,bbb", "bbb,ccc" },
+        $.hashtagCoupling(2));
+    assertArrayEquals(new String[] { "aaa,bbb" }, $.hashtagCoupling(1));
+    assertArrayEquals(new String[] { "aaa,bbb", "bbb,ccc" },
+        $.hashtagCoupling(3));
+
   }
 
 }
