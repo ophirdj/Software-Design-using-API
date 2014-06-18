@@ -14,6 +14,12 @@ import org.junit.Test;
 import ac.il.technion.twc.api.Tweet;
 import ac.il.technion.twc.api.TwitterQueryAPI;
 
+/**
+ * Test class for {@link RetweetCounter}.
+ * 
+ * @author Ophir De Jager
+ * 
+ */
 public class RetweetCounterTest {
 
 	private final RetweetCounter $ = new RetweetCounter();
@@ -38,9 +44,53 @@ public class RetweetCounterTest {
 		$.init(f);
 	}
 
+	/**
+	 * Test method for {@link RetweetCounter#getRetweetCount(String)}.
+	 */
 	@Test
-	public final void counterCountsNumberOfRetweets() {
+	public final void counterCountsAllRetweets() {
+		assertEquals(1, $.getRetweetCount("base 2"));
+	}
+
+	/**
+	 * Test method for {@link RetweetCounter#getRetweetCount(String)}.
+	 */
+	@Test
+	public final void counterCountsRetweetsOfRetweets() {
 		assertEquals(2, $.getRetweetCount("base 1"));
+	}
+
+	/**
+	 * Test method for {@link RetweetCounter#getRetweetCount(String)}.
+	 */
+	@Test
+	public final void countRetweetsOfNonExistingTweetShouldReturn0() {
+		assertEquals(0, $.getRetweetCount("I don't even exist"));
+	}
+
+	/**
+	 * Test method for {@link RetweetCounter#getRetweetCount(String)}.
+	 */
+	@Test
+	public final void countRetweetsOfNonImportedTweetShouldReturn0() {
+		assertEquals(0, $.getRetweetCount("some tweet"));
+	}
+
+	/**
+	 * Test method for {@link RetweetCounter#getRetweetCount(String)}.
+	 */
+	@Test
+	public final void countRetweetsOfRetweetTweetShouldReturn0() {
+		assertEquals(0, $.getRetweetCount("re: base 1"));
+	}
+
+	/**
+	 * Test method for {@link RetweetCounter#clearData()}.
+	 */
+	@Test
+	public final void countRetweetsAfterClearDataShouldReturn0() {
+		$.clearData();
+		assertEquals(0, $.getRetweetCount("base 1"));
 	}
 
 }
