@@ -9,12 +9,11 @@ import ac.il.technion.twc.api.parsers.TweetJSONToMemory;
 import ac.il.technion.twc.api.tweet_extractors.JsonTweetExtractor;
 import ac.il.technion.twc.api.tweet_extractors.StringTweetExtractor;
 import ac.il.technion.twc.api.visitor.Visitor;
-import ac.il.technion.twc.impl.queries.FirstTweetFinder;
 import ac.il.technion.twc.impl.queries.HashtagsHighestCouplingFinder;
 import ac.il.technion.twc.impl.queries.OriginFinder;
 import ac.il.technion.twc.impl.queries.RetweetCounter;
 import ac.il.technion.twc.impl.queries.TweetBetweenFinder;
-import ac.il.technion.twc.impl.queries.UserTweetsCounter;
+import ac.il.technion.twc.impl.queries.UserTweetsQueries;
 
 /**
  * This class is meant to act as a wrapper to test your functionality. You
@@ -28,11 +27,10 @@ import ac.il.technion.twc.impl.queries.UserTweetsCounter;
  */
 public class FunctionalityTester {
 
-  FirstTweetFinder firstTweetFinder = new FirstTweetFinder();
   OriginFinder originFinder = new OriginFinder();
   RetweetCounter retweetCounter = new RetweetCounter();
   TweetBetweenFinder tweetBetweenFinder = new TweetBetweenFinder();
-  UserTweetsCounter userTweetsCounter = new UserTweetsCounter();
+  UserTweetsQueries userTweetsQueries = new UserTweetsQueries();
   HashtagsHighestCouplingFinder hashtagsHighestCouplingFinder =
       new HashtagsHighestCouplingFinder();
 
@@ -44,11 +42,10 @@ public class FunctionalityTester {
    * 
    */
   public FunctionalityTester() {
-    queries.add(firstTweetFinder);
     queries.add(originFinder);
     queries.add(retweetCounter);
     queries.add(tweetBetweenFinder);
-    queries.add(userTweetsCounter);
+    queries.add(userTweetsQueries);
     queries.add(hashtagsHighestCouplingFinder);
   }
 
@@ -137,7 +134,7 @@ public class FunctionalityTester {
    *           If it is not possible to complete the operation
    */
   public String getFirstTweet(final String userId) throws Exception {
-    return firstTweetFinder.getUserFirstTweet(userId);
+    return userTweetsQueries.getUserFirstTweet(userId);
   }
 
   // GROUP B
@@ -161,7 +158,7 @@ public class FunctionalityTester {
    * @return The number of tweets made by the user
    */
   public String numberTweetsByUser(final String userId) {
-    return Integer.toString(userTweetsCounter.getTweetsCountOfUser(userId));
+    return Integer.toString(userTweetsQueries.getTweetsCountOfUser(userId));
   }
 
   // GROUP C
