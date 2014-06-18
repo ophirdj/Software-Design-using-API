@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import ac.il.technion.twc.api.Tweet;
 import ac.il.technion.twc.api.TwitterQueryAPI;
@@ -26,11 +29,13 @@ public class HashtagsHighestCouplingFinder implements Visitor {
   @Override
   public void visit(final TwitterQueryAPI twitter) {
     final Map<CoupledTweets, Integer> map = new HashMap<>();
-    for (final Tweet tweet : twitter.getTweets())
-      for (int i = 0; i < tweet.getHashtags().size(); i++) {
-        final String hashtag1 = tweet.getHashtags().get(i);
-        for (final String hashtag2 : tweet.getHashtags().subList(i + 1,
-            tweet.getHashtags().size() - 1)) {
+    for (final Tweet tweet : twitter.getTweets()) {
+      final Set<String> hashtags = new HashSet<>(tweet.getHashtags());
+      for (final Iterator<String> iterator = hashtags.iterator(); iterator
+          .hasNext();) {
+        final String hashtag1 = iterator.next();
+        iterator.remove();
+        for (final String hashtag2 : hashtags) {
           final CoupledTweets coupledTweets =
               new CoupledTweets(hashtag1, hashtag2);
           map.put(coupledTweets, Integer.valueOf(1 + (!map
@@ -38,6 +43,7 @@ public class HashtagsHighestCouplingFinder implements Visitor {
               .intValue())));
         }
       }
+    }
     final List<Entry<CoupledTweets, Integer>> coupled =
         new ArrayList<>(map.entrySet());
     Collections.sort(coupled, new Comparator<Entry<CoupledTweets, Integer>>() {
@@ -65,7 +71,9 @@ public class HashtagsHighestCouplingFinder implements Visitor {
    * @return the k most coupled tweets
    */
   public String[] kMostCoupled(final int k) {
-    return coupledHashtags.subList(0, k).toArray(new String[k]);
+    int actualSize = Math.min(k, coupledHashtags.size());
+    return coupledHashtags.subList(0, actualSize)
+        .toArray(new String[actualSize]);
   }
 
   private static class CoupledTweets {
@@ -84,7 +92,7 @@ public class HashtagsHighestCouplingFinder implements Visitor {
 
     public String returnFormat() {
       return new StringBuilder(firstTweet)
-          .append(", ").append(secondTweet).toString(); //$NON-NLS-1$
+          .append(",").append(secondTweet).toString(); //$NON-NLS-1$
     }
 
     @Override

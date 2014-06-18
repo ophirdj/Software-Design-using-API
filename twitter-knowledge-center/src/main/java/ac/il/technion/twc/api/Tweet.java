@@ -89,21 +89,54 @@ public class Tweet implements Serializable {
 	}
 
 	@Override
-	public boolean equals(final Object o) {
-		if (o == null || o.getClass() != this.getClass())
-			return false;
-		final Tweet t = (Tweet) o;
-
-		return compareFields(this, t);
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (hashtags == null ? 0 : hashtags.hashCode());
+		result = prime * result
+				+ (parentTweet == null ? 0 : parentTweet.hashCode());
+		result = prime * result
+				+ (tweetDate == null ? 0 : tweetDate.hashCode());
+		result = prime * result + (tweetId == null ? 0 : tweetId.hashCode());
+		result = prime * result + (user == null ? 0 : user.hashCode());
+		return result;
 	}
 
-	private static boolean compareFields(final Tweet t1, final Tweet t2) {
-		if (!t1.tweetId.equals(t2.tweetId)
-				|| !t1.tweetDate.equals(t2.tweetDate))
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		if (t1.isRetweet())
-			return t1.parentTweet.equals(t2.parentTweet);
-		return t2.parentTweet == null;
+		if (getClass() != obj.getClass())
+			return false;
+		final Tweet other = (Tweet) obj;
+		if (hashtags == null) {
+			if (other.hashtags != null)
+				return false;
+		} else if (!hashtags.equals(other.hashtags))
+			return false;
+		if (parentTweet == null) {
+			if (other.parentTweet != null)
+				return false;
+		} else if (!parentTweet.equals(other.parentTweet))
+			return false;
+		if (tweetDate == null) {
+			if (other.tweetDate != null)
+				return false;
+		} else if (!tweetDate.equals(other.tweetDate))
+			return false;
+		if (tweetId == null) {
+			if (other.tweetId != null)
+				return false;
+		} else if (!tweetId.equals(other.tweetId))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
 	}
 
 }

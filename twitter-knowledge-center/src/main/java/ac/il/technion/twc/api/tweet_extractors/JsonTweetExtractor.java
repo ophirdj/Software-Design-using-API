@@ -16,28 +16,28 @@ import com.twitter.Extractor;
  * Created by Matan on 5/31/14.
  */
 public class JsonTweetExtractor implements TweetExtractor {
-	@Override
-	public Tweet extractTweet(final String s) {
-		Status stat;
-		try {
-			stat = TwitterObjectFactory.createStatus(s);
-		} catch (final TwitterException e) {
-			e.printStackTrace();
-			throw new ParsingErrorException();
-		}
+  @Override
+  public Tweet extractTweet(final String s) {
+    Status stat;
+    try {
+      stat = TwitterObjectFactory.createStatus(s);
+    } catch (final TwitterException e) {
+      e.printStackTrace();
+      throw new ParsingErrorException();
+    }
 
-		final Long id = stat.getId();
-		final Status orig = stat.getRetweetedStatus();
-		final String origId = orig == null ? null : Long.valueOf(orig.getId())
-				.toString();
-		final String txt = stat.getText();
-		final List<String> hashTags = new Extractor().extractHashtags(txt);
-		final Date d = stat.getCreatedAt();
-		final User user = stat.getUser();
-		String userID = null;
-		if (user != null)
-			userID = Long.toString(user.getId());
-		return new Tweet(id.toString(), origId, stat.getCreatedAt(), hashTags,
-				userID);
-	}
+    final Long id = stat.getId();
+    final Status orig = stat.getRetweetedStatus();
+    final String origId =
+        orig == null ? null : Long.valueOf(orig.getId()).toString();
+    final String txt = stat.getText();
+    final List<String> hashTags = new Extractor().extractHashtags(txt);
+    final Date d = stat.getCreatedAt();
+    final User user = stat.getUser();
+    String userID = null;
+    if (user != null)
+      userID = Long.toString(user.getId());
+    return new Tweet(id.toString(), origId, stat.getCreatedAt(), hashTags,
+        userID);
+  }
 }

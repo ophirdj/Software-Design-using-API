@@ -38,6 +38,7 @@ public class RetweetCounter implements Visitor {
    *          for getting the original tweet
    */
   public void init(final OriginFinder finder) {
+    retweetsCountById = new HashMap<>();
     for (final Tweet tweet : tweets) {
       if (tweet.isRetweet())
         continue;

@@ -29,6 +29,7 @@ public class FirstTweetFinder implements Visitor {
 	@Override
 	public void visit(final TwitterQueryAPI twitter) {
 		tweets = Collections.unmodifiableList(twitter.getTweets());
+
 	}
 
 	@Override
