@@ -132,4 +132,20 @@ public class HashtagsHighestCouplingFinderTest {
 		final String couples[] = $.kMostCoupled(k);
 		assertArrayEquals(COUPLES, couples);
 	}
+
+	/**
+	 * Test method for {@link HashtagsHighestCouplingFinder#kMostCoupled(int)}.
+	 */
+	@Test
+	public void kMostCoupledShouldReturnHashtagsWithHighestCouplingEvenWhenThereAreMoreThan2HashtagsInTweet() {
+		final TwitterQueryAPI twitter = mock(TwitterQueryAPI.class);
+		when(twitter.getTweets()).thenReturn(
+				Arrays.asList(
+						new Tweet("id1", null, new Date(1000), Arrays.asList(
+								"1a", "1b", "2b"), null), new Tweet("id1",
+								null, new Date(1000),
+								Arrays.asList("1a", "2b"), null)));
+		$.visit(twitter);
+		assertArrayEquals(new String[] { "1a,2b" }, $.kMostCoupled(1));
+	}
 }
