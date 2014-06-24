@@ -66,10 +66,10 @@ public class TweetBetweenFinderTest {
 	 * 
 	 * @throws NotTweetInRangeException
 	 */
-	@Test(expected = NotTweetInRangeException.class)
-	public final void findTweetBetweenTweetWithTimeAsLowerBoundShouldThrow()
+	@Test
+	public final void findTweetBetweenTweetWithTimeAsLowerBoundShouldReturnTweet()
 			throws NotTweetInRangeException {
-		$.findTweetBetween(new Date(1000), new Date(1600));
+		assertEquals("1000", $.findTweetBetween(new Date(1000), new Date(1600)));
 	}
 
 	/**
@@ -77,10 +77,10 @@ public class TweetBetweenFinderTest {
 	 * 
 	 * @throws NotTweetInRangeException
 	 */
-	@Test(expected = NotTweetInRangeException.class)
-	public final void findTweetBetweenTweetWithTimeAsUpperBoundShouldThrow()
+	@Test
+	public final void findTweetBetweenTweetWithTimeAsUpperBoundShouldReturnTweet()
 			throws NotTweetInRangeException {
-		$.findTweetBetween(new Date(1500), new Date(2000));
+		assertEquals("2000", $.findTweetBetween(new Date(1500), new Date(2000)));
 	}
 
 	/**
