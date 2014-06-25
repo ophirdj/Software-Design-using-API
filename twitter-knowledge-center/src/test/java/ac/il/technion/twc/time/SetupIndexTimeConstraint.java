@@ -1,4 +1,4 @@
-package ac.il.technion.twc;
+package ac.il.technion.twc.time;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,20 +7,21 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import ac.il.technion.twc.FunctionalityTester;
+
 /**
  * Assert time constraints of methods of {@link FunctionalityTester}.
  * 
  * @author Ophir De Jager
  * 
  */
-public class TimeConstraintsTest {
+public class SetupIndexTimeConstraint {
 
   private static final int BASE_TWEETS = 2000;
   private static final String[] lines = TestUtils.generateTweets(BASE_TWEETS,
       5, 3, 0, 0);
   private static final int linesLengthApproximation = 312000;
 
-  // imported data but didn't set up index
   private final FunctionalityTester tkcSetupIndex = new FunctionalityTester();
 
   /**
@@ -68,5 +69,4 @@ public class TimeConstraintsTest {
   public final void setupIndexShouldRun10000nsForEachTweet() throws Exception {
     tkcSetupIndex.setupIndex();
   }
-
 }

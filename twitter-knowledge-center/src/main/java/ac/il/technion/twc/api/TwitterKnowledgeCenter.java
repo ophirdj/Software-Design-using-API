@@ -41,7 +41,6 @@ public class TwitterKnowledgeCenter implements TwitterQueryAPI {
     for (final String tweetString : lines)
       inputList.add(extractor.extractTweet(tweetString));
     preserver.reserve(inputList);
-
   }
 
   /**
