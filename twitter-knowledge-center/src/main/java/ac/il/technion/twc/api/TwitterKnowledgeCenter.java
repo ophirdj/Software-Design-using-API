@@ -16,62 +16,62 @@ import ac.il.technion.twc.api.visitor.Visitor;
  * @author Gal Lalouche
  */
 public class TwitterKnowledgeCenter implements TwitterQueryAPI {
-  private final TweetToMemory preserver;
-  List<Tweet> tweets;
+	private final TweetToMemory preserver;
+	List<Tweet> tweets;
 
-  /**
-   * @param importerExporter
-   *          for storing and loading the tweets
-   */
-  public TwitterKnowledgeCenter(final TweetToMemory importerExporter) {
-    preserver = importerExporter;
-    tweets = new LinkedList<>();
-  }
+	/**
+	 * @param importerExporter
+	 *            for storing and loading the tweets
+	 */
+	public TwitterKnowledgeCenter(final TweetToMemory importerExporter) {
+		preserver = importerExporter;
+		tweets = new LinkedList<>();
+	}
 
-  /**
-   * Loads the data from an array of lines
-   * 
-   * @param lines
-   *          An array of lines, each line formatted as <time (dd/MM/yyyy
-   *          HH:mm:ss)>,<tweet id>[,original tweet]
-   */
-  @Override
-  public void importData(final String[] lines, final TweetExtractor extractor) {
-    final List<Tweet> inputList = new LinkedList<>();
-    for (final String tweetString : lines)
-      inputList.add(extractor.extractTweet(tweetString));
-    preserver.reserve(inputList);
-  }
+	/**
+	 * Loads the data from an array of lines
+	 * 
+	 * @param lines
+	 *            An array of lines, each line formatted as <time (dd/MM/yyyy
+	 *            HH:mm:ss)>,<tweet id>[,original tweet]
+	 */
+	@Override
+	public void importData(final String[] lines, final TweetExtractor extractor) {
+		final List<Tweet> inputList = new LinkedList<>();
+		for (final String tweetString : lines)
+			inputList.add(extractor.extractTweet(tweetString));
+		preserver.reserve(inputList);
+	}
 
-  /**
-   * Loads the index, allowing for queries on the data that was imported using
-   * {@link FunctionalityTester#importData(String[])}. setupIndex will be called
-   * before any queries can be run on the system
-   */
-  @Override
-  public void setupIndex(final List<Visitor> visitors) {
-    tweets = preserver.recover();
-    for (final Visitor v : visitors)
-      accept(v);
-  }
+	/**
+	 * Loads the index, allowing for queries on the data that was imported using
+	 * {@link FunctionalityTester#importData(String[])}. setupIndex will be
+	 * called before any queries can be run on the system
+	 */
+	@Override
+	public void setupIndex(final List<Visitor> visitors) {
+		tweets = preserver.recover();
+		for (final Visitor v : visitors)
+			accept(v);
+	}
 
-  @Override
-  public List<Tweet> getTweets() {
-    return tweets;
-  }
+	@Override
+	public List<Tweet> getTweets() {
+		return tweets;
+	}
 
-  /**
-   * Cleans up all persistent data from the system; this method will be called
-   * before every test, to ensure that all tests are independent.
-   */
-  @Override
-  public void cleanPersistentData() {
-    preserver.clear();
-  }
+	/**
+	 * Cleans up all persistent data from the system; this method will be called
+	 * before every test, to ensure that all tests are independent.
+	 */
+	@Override
+	public void cleanPersistentData() {
+		preserver.clear();
+	}
 
-  @Override
-  public void accept(final Visitor v) {
-    v.clearData();
-    v.visit(this);
-  }
+	@Override
+	public void accept(final Visitor v) {
+		v.clearData();
+		v.visit(this);
+	}
 }

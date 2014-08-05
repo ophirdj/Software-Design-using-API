@@ -92,7 +92,7 @@ public class HashtagsHighestCouplingFinder implements Visitor {
 
     public String returnFormat() {
       return new StringBuilder(firstTweet)
-          .append(",").append(secondTweet).toString(); //$NON-NLS-1$
+          .append(", ").append(secondTweet).toString(); //$NON-NLS-1$
     }
 
     @Override

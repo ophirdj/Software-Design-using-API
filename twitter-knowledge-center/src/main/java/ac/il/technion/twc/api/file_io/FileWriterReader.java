@@ -23,6 +23,7 @@ public class FileWriterReader implements WriterReader {
   public FileWriterReader(final String path) {
     file = new File(path);
     try {
+	  file.getParentFile().mkdirs();
       if (!file.exists())
         file.createNewFile();
     } catch (final IOException e) {
