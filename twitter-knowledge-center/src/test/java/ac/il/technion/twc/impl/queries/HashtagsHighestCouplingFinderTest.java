@@ -75,7 +75,7 @@ public class HashtagsHighestCouplingFinderTest {
 		for (int i = 0; i < $.length; ++i) {
 			final String s = hashtags[i][0];
 			final String t = hashtags[i][1];
-			$[i] = s.compareTo(t) < 0 ? s + "," + t : t + "," + s;
+			$[i] = s.compareTo(t) < 0 ? s + ", " + t : t + ", " + s;
 		}
 		return $;
 	}
@@ -146,6 +146,6 @@ public class HashtagsHighestCouplingFinderTest {
 								null, new Date(1000),
 								Arrays.asList("1a", "2b"), null)));
 		$.visit(twitter);
-		assertArrayEquals(new String[] { "1a,2b" }, $.kMostCoupled(1));
+		assertArrayEquals(new String[] { "1a, 2b" }, $.kMostCoupled(1));
 	}
 }
